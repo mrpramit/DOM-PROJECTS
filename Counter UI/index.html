@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter UI</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f3f5f9;
+        }
+
+        .card {
+            width: 320px;
+            background: white;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #222;
+        }
+
+        .count {
+            font-size: 55px;
+            margin: 15px 0 20px;
+            font-weight: 700;
+            color: #4b3cff;
+        }
+
+        .btn-row {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn {
+            height: 45px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .btn-icon {
+            width: 50px;
+            background: #4b3cff;
+            color: white;
+        }
+
+        .btn-reset {
+            width: 90px;
+            background: #ff4d4d;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h2>Counter</h2>
+
+        <div class="count">0</div>
+
+        <div class="btn-row">
+            <button onclick="inc()" class="btn btn-icon">+</button>
+            <button class="btn btn-reset" onclick="reset()">Reset</button>
+            <button onclick="dec()" class="btn btn-icon">-</button>
+        </div>
+    </div>
+
+    <!-- <script>
+        var count = document.querySelector(".count");
+        // console.log(count);
+        var maincount = 0;
+
+        function inc(){
+            maincount++;
+            count.innerHTML = maincount;
+            if(maincount == 10){
+                // alert("Maximum limit reached");
+                var btns = document.getElementsByClassName("btn-icon");
+                btns[0].disabled = true;
+            }        
+        }
+
+        function dec(){
+            
+            if(maincount == 0){
+                var btns = document.getElementsByClassName("btn-icon");
+                btns[1].disabled = true;
+            } else{
+                maincount--;
+                count.innerHTML = maincount;
+            }
+        }
+
+        function reset(){
+            maincount = 0;
+            count.innerHTML = maincount;
+            var btns = document.getElementsByClassName("btn-icon");
+            btns[0].disabled = false;
+            btns[1].disabled = false;
+        }
+    </script> -->
+
+    <script>
+        var count = document.querySelector(".count");
+        var btns = document.getElementsByClassName("btn-icon");
+
+        var maincount = 0;
+        var maxLimit = 10;
+        var minLimit = 0;
+
+        function updateUI() {
+            count.innerHTML = maincount;
+
+            // Enable/disable buttons properly
+            btns[0].disabled = (maincount >= maxLimit); // + button
+            btns[1].disabled = (maincount <= minLimit); // - button
+        }
+
+        function inc() {
+            if (maincount < maxLimit) {
+                maincount++;
+            }
+            updateUI();
+        }
+
+        function dec() {
+            if (maincount > minLimit) {
+                maincount--;
+            }
+            updateUI();
+        }
+
+        function reset() {
+            maincount = 0;
+            updateUI();
+        }
+
+        // initial state
+        updateUI();
+    </script>
+
+</body>
+
+</html>
